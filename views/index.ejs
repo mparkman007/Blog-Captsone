@@ -1,0 +1,41 @@
+<%- include("partials/header.ejs") %>
+
+
+
+  <h1>Notes From the Deep</h1>
+<form action="/post" method="POST">
+
+  <textarea id="postComposer" contenteditable="true" name="postComposer" placeholder="Create a post here...."></textarea>
+  <div class="container">
+  <button type="submit">Post</button>
+  </div>
+</form>
+<h2>Previous Posts seen:</h2>
+<% if(locals.posts){ %>
+  <% for(let i = 0; i < posts.length; i++){ %>
+    <% var num = i %>
+    <div class="card">
+      <form>
+        
+
+        <input type = "hidden" name = "postNumber" value = '<%=num%>' >
+        <div class = "postBox">
+          <textarea id='<%=num%>' name = "editedPost"  readonly = "true"><%= posts[i] %></textarea>
+        </div>
+        <div class = "buttons-container flex-container">
+          <button id="<%=num%>Btn" type = "submit" class="btn" formaction = "/editSubmit" formmethod="POST" value="Repost" disabled>Repost</button>
+          <button type = "submit" class=""formaction = "/delete" formmethod="POST">Delete</button>
+        
+      </div>
+    </form>
+      
+        <button type="toggle" class="toggle" onclick="toggleEdit(this, '<%=num %>')">Edit</button>
+      
+  </div>
+
+  <% } %>
+  
+<% } %>
+  
+
+  <%- include("partials/footer.ejs") %>
